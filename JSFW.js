@@ -15,7 +15,8 @@
 			this.length = selector.length;
 			if (typeof this.length === 'undefined') {this.length = 1;}
 			this.version = '0.0.1';
-			var i;
+			
+			var i = 0;
 			for (i = 0; i < this.length; i++) {
 				this[i] = selector[i];
 			}
