@@ -1,7 +1,7 @@
 (
 
 	function () {
-		var __ = function (args) {
+		var $$$ = function (args) {
 			return new lib(args);
 		};
 		
@@ -14,7 +14,7 @@
 			}
 			this.length = selector.length;
 			if (typeof this.length === 'undefined') {this.length = 1;}
-			this.version = '1.0.1';
+			this.version = '0.0.1';
 			
 			var i = 0;
 			for (i = 0; i < this.length; i++) {
@@ -24,7 +24,7 @@
 			return this;
 		};
 		
-		__.func = lib.prototype = {
+		$$$.func = lib.prototype = {
 			/* general */
 			hide: function() {
 				var len = this.length;
@@ -114,8 +114,8 @@
 			}
 		};
 		
-		if(!window.__) {
-			window.__ = __;
+		if(!window.$$$) {
+			window.$$$ = $$$;
 		}
 	}
 	
