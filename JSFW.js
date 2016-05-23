@@ -14,7 +14,7 @@
 			}
 			this.length = selector.length;
 			if (typeof this.length === 'undefined') {this.length = 1;}
-			this.version = '0.0.1';
+			this.version = '1.0.1';
 			
 			var i = 0;
 			for (i = 0; i < this.length; i++) {
