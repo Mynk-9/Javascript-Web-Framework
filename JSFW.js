@@ -1,7 +1,7 @@
 (
 
 	function () {
-		var $$$ = function (args) {
+		var ___ = function (args) {
 			return new lib(args);
 		};
 		
@@ -24,7 +24,7 @@
 			return this;
 		};
 		
-		$$$.func = lib.prototype = {
+		___.func = lib.prototype = {
 			/* general */
 			hide: function() {
 				var len = this.length;
@@ -114,8 +114,8 @@
 			}
 		};
 		
-		if(!window.$$$) {
-			window.$$$ = $$$;
+		if(!window.___) {
+			window.___ = ___;
 		}
 	}
 	
