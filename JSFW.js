@@ -1,3 +1,6 @@
+/*! Copyright © 2016 Mayank Mathur 
+see license at - https://raw.githubusercontent.com/Mynk-9/Javascript-Web-Framework/master/LICENSE
+*/
 (
 
 	function () {
@@ -40,7 +43,7 @@
 				}
 				return this;
 			},
-			/* class and id */
+			/* class, id etc. */
 			toggleClass: function(oldC, newC) {
 				var len = this.length;
 				while(len--) {
@@ -90,6 +93,28 @@
 				}
 				return this;
 			},
+			coordinates: function() {
+				var pos = [];
+				if (this.length === 1) {
+					pos = {x: this[0].offsetLeft, y: this[0].offsetTop};
+				} else {
+					for (len = 0; len < this.length; len++) {
+						pos[len] = {x: this[len].offsetLeft, y: this[len].offsetTop};
+					}
+				}
+				return pos;
+			},
+			scrolled: function() {
+				var pos = [];
+				if (this.length === 1) {
+					pos = {x: this[0].scrollLeft, y: this[0].scrollTop};
+				} else {
+					for (len = 0; len < this.length; len++) {
+						pos[len] = {x: this[len].scrollLeft, y: this[len].scrollTop};
+					}
+				}
+				return pos;
+			},
 			/* events */
 			onEvent: function(evnt, fun) {
 				var len = this.length;
@@ -112,6 +137,19 @@
 				document.head.appendChild(x);
 				return this;
 			}
+			/* how to add new method
+			
+			methodName: function(eventArgs) {
+				// all the code here
+				//
+				//
+				
+				return this;
+					// or
+				return returnVar;
+			}
+			
+			*/
 		};
 		
 		if(!window.___) {
