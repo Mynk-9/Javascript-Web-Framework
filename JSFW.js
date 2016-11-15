@@ -17,7 +17,7 @@ see license at - https://raw.githubusercontent.com/Mynk-9/Javascript-Web-Framewo
 			}
 			this.length = selector.length;
 			if (typeof this.length === 'undefined') {this.length = 1;}
-			this.version = '1.0.1';
+			this.version = '2.0.0';
 			
 			var i = 0;
 			for (i = 0; i < this.length; i++) {
@@ -42,6 +42,64 @@ see license at - https://raw.githubusercontent.com/Mynk-9/Javascript-Web-Framewo
 					this[len].style.display = 'inherit';
 				}
 				return this;
+			},
+			coordinates: function() {
+				var pos = [];
+				if (this.length === 1) {
+					pos = {x: this[0].offsetLeft, y: this[0].offsetTop};
+				} else {
+					for (len = 0; len < this.length; len++) {
+						pos[len] = {x: this[len].offsetLeft, y: this[len].offsetTop};
+					}
+				}
+				return pos;
+			},
+			scrolled: function() {
+				var pos = [];
+				if (this.length === 1) {
+					pos = {x: this[0].scrollLeft, y: this[0].scrollTop};
+				} else {
+					for (len = 0; len < this.length; len++) {
+						pos[len] = {x: this[len].scrollLeft, y: this[len].scrollTop};
+					}
+				}
+				return pos;
+			},
+			animate: function(posFrom, posTo, func, time) {
+				if (typeof(func) != 'string' || typeof(posFrom) != 'object' || typeof(posTo) != 'object' || typeof(time) != 'number') {
+					console.log('error in animate function -> invalid arguments');
+					return 0;
+				}
+				//console.log(((posTo[1] - posFrom[1]) || (posTo.y - posFrom.y) || (posTo.y - posFrom[1]) || (posTo[1] - posFrom.y)));
+				
+				var len = this.length;
+				console.log(this[0]);
+				var anims = [len];
+				while (len--) {
+					
+					var diff_X = ((posTo[0] - posFrom[0]) || (posTo.x - posFrom.x) || (posTo.x - posFrom[0]) || (posTo[0] - posFrom.x));
+					var diff_Y = ((posTo[1] - posFrom[1]) || (posTo.y - posFrom.y) || (posTo.y - posFrom[1]) || (posTo[1] - posFrom.y));
+					var speed_X = diff_X / time;
+					var speed_Y = diff_Y / time;
+					var net_X, net_Y, fps;
+					net_X = (posFrom[0] || posFrom.x);
+					net_Y = (posFrom[1] || posFrom.y);
+					fps = 20;
+					var cont = 0;
+					
+					var obj = this[len];
+					var itr = len;
+					anims[len] = setInterval(function() {
+						if (net_X < diff_X && net_Y < diff_Y) {
+							net_X += (speed_X / fps);
+							net_Y += (speed_Y / fps);
+							obj.style.left = net_X + 'px';
+							obj.style.top = net_Y + 'px';
+						} else {
+							clearInterval(anims[itr]);
+						}
+					}, time/fps*1000);
+				}
 			},
 			/* class, id etc. */
 			toggleClass: function(oldC, newC) {
@@ -92,28 +150,6 @@ see license at - https://raw.githubusercontent.com/Mynk-9/Javascript-Web-Framewo
 					this[len].className = this[len].className.replace(_class, '');
 				}
 				return this;
-			},
-			coordinates: function() {
-				var pos = [];
-				if (this.length === 1) {
-					pos = {x: this[0].offsetLeft, y: this[0].offsetTop};
-				} else {
-					for (len = 0; len < this.length; len++) {
-						pos[len] = {x: this[len].offsetLeft, y: this[len].offsetTop};
-					}
-				}
-				return pos;
-			},
-			scrolled: function() {
-				var pos = [];
-				if (this.length === 1) {
-					pos = {x: this[0].scrollLeft, y: this[0].scrollTop};
-				} else {
-					for (len = 0; len < this.length; len++) {
-						pos[len] = {x: this[len].scrollLeft, y: this[len].scrollTop};
-					}
-				}
-				return pos;
 			},
 			/* events */
 			onEvent: function(evnt, fun) {
